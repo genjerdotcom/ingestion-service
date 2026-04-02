@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+
+# Env files (root & subfolders)
+.env
+.env.*
+
+# Virtual env (root & subfolders)
+venv/
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+
+# Git
+.git/

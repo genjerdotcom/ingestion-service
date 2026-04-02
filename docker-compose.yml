@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: customer_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mock-server:
+    build: ./mock-server
+    ports:
+      - "5000:5000"
+
+  pipeline-service:
+    build: ./pipeline-service
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:
