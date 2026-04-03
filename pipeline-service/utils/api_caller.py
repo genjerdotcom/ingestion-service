@@ -5,7 +5,6 @@ from utils.http_client import get_json
 FLASK_HOST = os.getenv("FLASK_HOST", "localhost")
 FLASK_PORT = os.getenv("FLASK_PORT", "5000")
 
-
 def fetch_customers_paginated(page: int = 1, limit: int = 10):
     base_url = f"http://{FLASK_HOST}:{FLASK_PORT}"
 

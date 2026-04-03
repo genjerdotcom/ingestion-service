@@ -6,9 +6,6 @@ from repositories.customer_repository import CustomerRepository
 from dto.customer_dto import CustomerDTO
 from utils.api_caller import fetch_customers_paginated
 
-FLASK_HOST = os.getenv("FLASK_HOST", "localhost")
-FLASK_PORT = os.getenv("FLASK_PORT", "5000")
-
 
 class IngestionService:
 
