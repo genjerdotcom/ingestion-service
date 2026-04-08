@@ -26,8 +26,6 @@ class BaseRepository:
             logger.error(f"[GET REPOSITORY ERROR] {str(e)}")
             raise AppException("Failed to fetch data", 500)
 
-    from sqlalchemy import func
-
     def get_paginate(self, offset=0, limit=10):
         try:
             logger.debug(f"[GET REPOSITORY ALL] {self.model.__name__}")
