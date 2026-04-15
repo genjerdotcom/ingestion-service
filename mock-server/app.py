@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify, request
 import json
+import ijson
 
 app = Flask(__name__)
 
@@ -16,32 +17,11 @@ def standard_response(data=None, message="success", status=200):
 
 
 def stream_customers(start=0, limit=10):
-    with open(CUSTOMERS_FILE) as f:
-        buffer = ""
-        in_array = False
-        count = 0
-        for line in f:
-            line = line.strip()
-            if line.startswith("["):
-                in_array = True
-                line = line[1:]
-            if line.endswith("]"):
-                line = line[:-1]
-            if not line:
-                continue
-            buffer += line
-            if buffer.endswith("},") or buffer.endswith("}"):
-                item_str = buffer.rstrip(",")
-                try:
-                    item = json.loads(item_str)
-                except json.JSONDecodeError:
-                    buffer = ""
-                    continue
-                buffer = ""
-                if count >= start and count < start + limit:
-                    yield item
-                count += 1
-        return
+    with open(CUSTOMERS_FILE, 'r') as f:
+        items = ijson.items(f, 'item')
+        for i, item in enumerate(items):
+            if i >= start and i < start + limit:
+                yield item
 
 
 @app.route("/")
